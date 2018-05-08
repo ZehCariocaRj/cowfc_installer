@@ -37,7 +37,7 @@ touch /var/www/.locale-done
 C1="0" # A counting variable
 C2="0" # A counting variable
 lanip="$(hostname  -I | cut -f1 -d' ')"
-wanip="$(curl -s icanhazip.com)"
+wanip="$(curl -4 -s icanhazip.com)"
 IP="" # Used for user input
 mod1="proxy" # This is a proxy mod that is dependent on the other 2
 mod2="proxy_http" # This is related to mod1
