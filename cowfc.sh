@@ -36,6 +36,8 @@ touch /var/www/.locale-done
 # Variables used by the script in various sections to pre-fill long commandds
 C1="0" # A counting variable
 C2="0" # A counting variable
+lanip="$(hostname  -I | cut -f1 -d' ')"
+wanip="$(curl -s icanhazip.com)"
 IP="" # Used for user input
 mod1="proxy" # This is a proxy mod that is dependent on the other 2
 mod2="proxy_http" # This is related to mod1
@@ -212,19 +214,26 @@ cat >>/etc/dnsmasq.conf <<EOF
 server=8.8.8.8
 EOF
 sleep 2s
-echo "What is your EXTERNAL IP?"
-echo "NOTE: If you plan on using this on a LAN, put the IP of your Linux system instead"
-echo "It's also best practice to make this address static in your /etc/network/interfaces file"
 echo "your LAN IP is"
-hostname  -I | cut -f1 -d' '
+$lanip
 echo "Your external IP is:"
-curl -4 -s icanhazip.com
+$wanip
+if [ "$lanip" = "127.0.0.1" ] || [ "$lanip" = "$wanip" ] || [ -z "$lanip" ] ; then
+	echo "You appear to be using a cloud server. Automatic setup starting..."
+	IP="$wanip"
+	echo "Using $IP as the IP for DNS."
+cat >>/etc/dnsmasq.conf <<EOF # Adds your IP you provide to the end of the DNSMAS$
+address=/nintendowifi.net/$IP
+address=/wiimmfi.de/$IP
+EOF
+else
 echo "Please type in either your LAN or external IP"
 read -re IP
 cat >>/etc/dnsmasq.conf <<EOF # Adds your IP you provide to the end of the DNSMASQ config file
 address=/nintendowifi.net/$IP
 address=/wiimmfi.de/$IP
 EOF
+fi
 clear
 echo "DNSMasq setup completed!"
 clear
