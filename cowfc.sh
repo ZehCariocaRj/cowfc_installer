@@ -246,7 +246,7 @@ elif [ "$ipoption" == "2" ] ; then
     echo "PLEASE NOTE, AND READ: Unlike the LAN IP, the WAN IP will rarely change. This however, does not mean that will never change. In the event that your WAN IP changes, it is your responsibility to update your /etc/dnsmasq/dnsmasq.conf file with the new address. After that, you must reboot your server for the changes to take effect."
     read -p "Please press ENTER if you accept this warning, or ctrl+c to abort."
     IP=wanip
-else
+elif [ "$ipoption" == "3" ] ; then
     echo "You have chosen to enter a custom IP. There are currently no typical applications for it. The only application that comes to mind, is if a load-balancer is used, and therefore shares an IP between two machines"
     echo "In this case, a DNS server is not technically needed on the same machine as the DWC server."
     echo "Please enter the IP you would like to use, then press the ENTER key to continue with setup."
