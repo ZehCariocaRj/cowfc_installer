@@ -269,7 +269,7 @@ clear
 
 function install_required_packages {
 # Add PHP 7.1 repo
-if [ ! -f "/var/www/.php71-added" ] && ! command -v "apt-get install php7.1" ; then
+if [ ! -f "/var/www/.php71-added" ] && ! apt-get install php7.1 -y ; then
     echo "Adding the PHP 7.1 repository. Please follow any prompts."
 if ! add-apt-repository ppa:ondrej/php ; then
     apt-get install --force-yes software-properties-common python-software-properties -y
