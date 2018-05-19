@@ -252,6 +252,8 @@ elif [ "$ipoption" == "3" ] ; then
     echo "In this case, a DNS server is not technically needed on the same machine as the DWC server."
     echo "Please enter the IP you would like to use, then press the ENTER key to continue with setup."
     read -re IP
+else
+exit
 fi
 cat >>/etc/dnsmasq.conf <<EOF # Adds your IP you provide to the end of the DNSMASQ config file
 address=/nintendowifi.net/$IP
@@ -267,7 +269,7 @@ clear
 
 function install_required_packages {
 # Add PHP 7.1 repo
-if [ ! -f "/var/www/.php71-added" ] ; then
+if [ ! -f "/var/www/.php71-added" ] && ! command -v "apt-get install php7.1" ; then
     echo "Adding the PHP 7.1 repository. Please follow any prompts."
 if ! add-apt-repository ppa:ondrej/php ; then
     apt-get install --force-yes software-properties-common python-software-properties -y
