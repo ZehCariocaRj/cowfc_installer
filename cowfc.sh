@@ -232,20 +232,20 @@ echo "Please choose from one of the following IPs:"
 echo "1) LAN: $lanip"
 echo "2) WAN: $wanip"
 echo "3) Custom"
-read -p "Please enter 1,2 or 3: " ipoption
+read -rp "Please enter 1,2 or 3: " ipoption
 if [ "$ipoption" == "1" ] ; then
     clear
     echo "You've chosen to use your current LAN IP address, which is $lanip."
     echo "PLEASE NOTE, AND READ: If this system is assigned a dynamic IP, it is highly advised to either assign a static address, or create a DHCP reservation."
     echo "Failure to do this may cause DNS not to function if the server is no longer using the old IP address."
     echo "As a result, you will need to manually modify the last two lines in /etc/dnsmasq/dnsmasq.conf to update the address manually, in the event that it changes. After this, you must reboot your server for the changes to take effect"
-    read -p "Please press ENTER if you accept this warning, or ctrl+c to abort."
+    read -rp "Please press ENTER if you accept this warning, or ctrl+c to abort."
     IP=lanip
 elif [ "$ipoption" == "2" ] ; then
     clear
     echo "You've chosen to use your current WAN IP address, which is $wanip."
     echo "PLEASE NOTE, AND READ: Unlike the LAN IP, the WAN IP will rarely change. This however, does not mean that will never change. In the event that your WAN IP changes, it is your responsibility to update your /etc/dnsmasq/dnsmasq.conf file with the new address. After that, you must reboot your server for the changes to take effect."
-    read -p "Please press ENTER if you accept this warning, or ctrl+c to abort."
+    read -rp "Please press ENTER if you accept this warning, or ctrl+c to abort."
     IP=wanip
 elif [ "$ipoption" == "3" ] ; then
     echo "You have chosen to enter a custom IP. There are currently no typical applications for it. The only application that comes to mind, is if a load-balancer is used, and therefore shares an IP between two machines"
