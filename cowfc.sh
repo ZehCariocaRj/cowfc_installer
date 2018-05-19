@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=2035
 # DWC Network Installer script by kyle95wm/beanjr - re-written for CoWFC
 # Check if we already installed the server
 if [ -f /etc/.dwc_installed ] ; then
